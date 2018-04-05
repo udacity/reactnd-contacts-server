@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
     GET /contacts
     DELETE /contacts/:id
-    POST /contacts { name, handle, avatarURL }
+    POST /contacts { name, email, avatarURL }
   </pre>
   `
 
@@ -51,13 +51,13 @@ app.delete('/contacts/:id', (req, res) => {
 })
 
 app.post('/contacts', bodyParser.json(), (req, res) => {
-  const { name, handle } = req.body
+  const { name, email } = req.body
 
-  if (name && handle) {
+  if (name && email) {
     res.send(contacts.add(req.token, req.body))
   } else {
     res.status(403).send({
-      error: 'Please provide both a name and a handle'
+      error: 'Please provide both a name and an email address'
     })
   }
 })
